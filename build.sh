@@ -11,7 +11,16 @@ export IMAGE_NAME=PuppyKernel
 export KERNELZIP="PuppyKernel.zip"
 export KERNELVERSION=0.1
 
+# gcc exec format
+export GCC_EXEC=aarch64-zyc-linux-gnu-
+
+# ccache exec
 export CCACHE=ccache
+
+# Toolchains path
+export CLANG_DIR=/home/chanz22/tc/Clang-20.0.0/bin/
+export LLVM_DIR="$(CLANG_DIR)"
+export GCC_PATH=/home/chanz22/tc/aarch64-zyc-linux-gnu-14/bin/"$GCC_EXEC"
 
 DATE_START=$(date +"%s")
 

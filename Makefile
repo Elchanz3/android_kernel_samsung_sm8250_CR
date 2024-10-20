@@ -326,7 +326,8 @@ include scripts/subarch.include
 # Alternatively CROSS_COMPILE can be set in the environment.
 # Default value for CROSS_COMPILE is not to prefix executables
 # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
-ARCH		?= $(SUBARCH)
+ARCH		?= arm64
+CROSS_COMPILE   ?= $(GCC_PATH)
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
@@ -382,15 +383,15 @@ KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
 # Make variables (CC, etc...)
 CPP		= $(CC) -E
 ifneq ($(LLVM),)
-CC		= clang
-LD		= ld.lld
-AR		= llvm-ar
-NM		= llvm-nm
-OBJCOPY		= llvm-objcopy
-OBJDUMP		= llvm-objdump
-READELF		= llvm-readelf
-OBJSIZE		= llvm-size
-STRIP		= llvm-strip
+CC		= $(CLANG_DIR)clang
+LD		= $(LLVM_DIR)ld.lld
+AR		= $(LLVM_DIR)llvm-ar
+NM		= $(LLVM_DIR)llvm-nm
+OBJCOPY		= $(LLVM_DIR)llvm-objcopy
+OBJDUMP		= $(LLVM_DIR)llvm-objdump
+READELF		= $(LLVM_DIR)llvm-readelf
+OBJSIZE		= $(LLVM_DIR)llvm-size
+STRIP		= $(LLVM_DIR)llvm-strip
 else
 CC		= $(CROSS_COMPILE)gcc
 LD		= $(CROSS_COMPILE)ld
@@ -641,8 +642,8 @@ endif
 ifdef CONFIG_LTO_CLANG
 # use llvm-ar for building symbol tables from IR files, and llvm-nm instead
 # of objdump for processing symbol versions and exports
-LLVM_AR		:= llvm-ar
-LLVM_NM		:= llvm-nm
+LLVM_AR		:= $(LLVM_DIR)llvm-ar
+LLVM_NM		:= $(LLVM_DIR)llvm-nm
 export LLVM_AR LLVM_NM
 endif
 
